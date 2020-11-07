@@ -6,8 +6,7 @@
  */
 export const omit = (obj, ...fields) => {
   const newObj = {};
-  for (let i = 0; i < Object.entries(obj).length; i++){
-    let prop = Object.entries(obj)[i][0];
+  for (const[prop] of Object.entries(obj)){
     if (!fields.includes(prop)){
       newObj[prop] = prop
     }
