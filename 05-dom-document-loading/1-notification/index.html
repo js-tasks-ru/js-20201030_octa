@@ -2,6 +2,7 @@
 <meta charset="UTF-8">
 
 <head>
+  <title>Notification</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -13,9 +14,11 @@
   btn1.addEventListener('click', () => {
     const notification = new NotificationMessage('Hello World', {
       duration: 2000,
-      type: 'success'
+      type: 'error'
     });
 
     notification.show();
   });
+
+
 </script>
