@@ -70,7 +70,6 @@ export default class ColumnChart {
 
     return [...elements].reduce((acc, subElement) => {
       acc[subElement.dataset.element] = subElement; //свойство объекта = HTML-элементу с соответсвующим data-атрибутом
-      console.log(acc);
       return acc;
     }, {});
   }
