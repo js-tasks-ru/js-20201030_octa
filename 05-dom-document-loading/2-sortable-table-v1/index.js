@@ -51,6 +51,7 @@ export default class SortableTable {
 
   getTableRow(item) {
     const cells = this.headersConfig.map(({ id, template }) => {
+      //в cells присваиваем массив объектов, в которых запоминаем id и template
       return {
         id,
         template,
@@ -59,9 +60,9 @@ export default class SortableTable {
 
     return cells
       .map(({ id, template }) => {
-        return template
+        return template //проверяем, есть ли template(). Если да, то передаём массив .url фото в template()
           ? template(item[id])
-          : `<div class="sortable-table__cell">${item[id]}</div>`;
+          : `<div class="sortable-table__cell">${item[id]}</div>`; //если нет, то получаем данные из data ({price,quantity,sales})
       })
       .join("");
   }
@@ -89,27 +90,27 @@ export default class SortableTable {
     const sortedData = this.sortData(field, order);
 
     const allColumns = this.element.querySelectorAll(
-      ".sortable-table__cell[data-id]"
+      ".sortable-table__cell[data-id]" //выбираем колонки
     );
     const currentColumn = this.element.querySelector(
-      `.sortable-table__cell[data-id="${field}"]`
+      `.sortable-table__cell[data-id="${field}"]` //выбираем колонки, которые могут быть отсортированы
     );
 
     // NOTE: Remove sorting arrow from other columns
     allColumns.forEach((column) => {
-      column.dataset.order = "";
+      column.dataset.order = ""; //убираем порядок сортировки со всех, кроме активной
     });
 
-    currentColumn.dataset.order = order;
+    currentColumn.dataset.order = order; //устанавливаем порядок сортировки в колонку
 
     this.subElements.body.innerHTML = this.getTableRows(sortedData);
   }
 
   sortData(field, order) {
-    const arr = [...this.data];
-    const column = this.headersConfig.find((item) => item.id === field);
+    const arr = [...this.data]; //разварачиваем в массив
+    const column = this.headersConfig.find((item) => item.id === field); //оставляем те колонки, которые будем сортировать по field
     const { sortType, customSorting } = column;
-    const direction = order === "asc" ? 1 : -1;
+    const direction = order === "asc" ? 1 : -1; //определяем направление сортировки
 
     return arr.sort((a, b) => {
       switch (sortType) {
